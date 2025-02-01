@@ -1147,3 +1147,31 @@ Example: jenkinsfile.build
 
 buildApp('backend', '1.0.0')
 ```
+
+Example: Jenkinsfile.seed
+
+```
+@Library('shared-library-repo') _
+
+pipeline {
+    agent {
+        label 'AGENT-1'
+    }
+    stages {
+        stage('Run Seed Job') {
+            steps {
+                script {
+                    // Run the seed job to create the pipeline jobs
+                    seedJob()
+                }
+            }
+        }
+    }
+    post {
+        always {
+            deleteDir()
+        }
+    }
+}
+
+```
